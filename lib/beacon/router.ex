@@ -128,7 +128,7 @@ defmodule Beacon.Router do
       See the module doc and `Beacon.Config` for more info.
 
     Live Session options:
-    
+
     You can also override the following [live_session](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.Router.html#live_session/3) options:
 
     * `:session` (optional) - an optional extra session map or MFA tuple to merge into Beacon's `live_session`.
@@ -321,6 +321,9 @@ defmodule Beacon.Router do
         {:ok, {endpoint, host}}
 
       %{phoenix_live_view: {Beacon.Web.PageLive, _, _, %{extra: %{session: %{"beacon_site" => ^site}}}}} ->
+        {:ok, {endpoint, host}}
+
+      %{phoenix_live_view: {Beacon.Web.PageLive, _, _, %{extra: %{session: {Beacon.Router, :session, [^site, _sess]}}}}} ->
         {:ok, {endpoint, host}}
 
       _ ->
