@@ -34,15 +34,15 @@ defmodule Beacon.Web.ErrorHTML do
   # Only works when editing existing sites. Going to admin will fallback
   # to phoenix error. Any suggestions on how to handle this, will be nice.
   defp fetch_session_site(%{params: %{"site" => site}})
-    when is_binary(site) and byte_size(site) > 0 do
+       when is_binary(site) and byte_size(site) > 0 do
     String.to_atom(site)
   end
 
   defp fetch_session_site(%{
-    private: %{
-      phoenix_live_view: {_, _, %{extra: %{session: site_session}}}
-    }
-  }) do
+         private: %{
+           phoenix_live_view: {_, _, %{extra: %{session: site_session}}}
+         }
+       }) do
     case site_session do
       %{"beacon_site" => site} -> site
       {Beacon.Router, :session, [site, _]} -> site

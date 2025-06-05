@@ -68,10 +68,11 @@ defmodule Beacon.RouterTest do
     end
 
     test "phoenix live_view site map" do
-      config2 = Map.merge(
-        Beacon.Config.fetch!(:my_site),
-        %{host: "host_test", prefix: "/", router: Beacon.BeaconTest.Router}
-      )
+      config2 =
+        Map.merge(
+          Beacon.Config.fetch!(:my_site),
+          %{host: "host_test", prefix: "/", router: Beacon.BeaconTest.Router}
+        )
 
       assert Router.reachable?(config2, host: "host.com", prefix: "/host_test")
     end
